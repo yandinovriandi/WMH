@@ -1,35 +1,21 @@
-# Judul Proyek
+# WMH (Wifi Monitoring Hotspot)
 
-[![Forks](https://img.shields.io/badge/forks-44-blue)](#)
-[![Stars](https://img.shields.io/badge/stars-13-yellow)](#)
+[![Forks](https://img.shields.io/badge/forks-44-blue)](https://github.com/yandinovriandi/WMH)
+[![Stars](https://img.shields.io/badge/stars-13-yellow)](https://github.com/yandinovriandi/WMH)
 
-Deskripsi singkat proyek atau tagline
 
-## Daftar Isi
+WMH (Wireless Monitoring Hotspot) adalah sebuah aplikasi berbasis web yang dibangun dengan menggunakan framework Laravel, Ajax, dan MikroTik API. Aplikasi ini dirancang untuk memonitor dan mengelola hotspot online, jumlah pengguna hotspot, dan juga pengguna PPPoE (Point-to-Point Protocol over Ethernet).
 
-- [Informasi Proyek](#informasi-proyek)
-- [Fitur](#fitur)
-- [Demo](#demo)
-- [Instalasi](#instalasi)
-- [Penggunaan](#penggunaan)
-- [Kontribusi](#kontribusi)
-- [Lisensi](#lisensi)
+Dengan WMH, Anda dapat dengan mudah memantau keadaan hotspot yang sedang online. Aplikasi ini menyediakan informasi real-time tentang jumlah pengguna yang terhubung ke hotspot Anda. Anda dapat melihat jumlah pengguna aktif, informasi detail tentang setiap pengguna, dan juga status koneksi mereka.
 
-## Informasi Proyek
+Selain itu, WMH juga menyediakan fitur untuk memonitor pengguna PPPoE. Anda dapat melihat daftar pengguna PPPoE yang terdaftar dan melihat detail penggunaan mereka, seperti jumlah data yang dikonsumsi atau waktu koneksi mereka.
 
-Tulis informasi detail tentang proyek Anda di sini, termasuk tujuan proyek, konteks, teknologi yang digunakan, dan informasi lain yang relevan.
+Selain fitur pemantauan, WMH juga memberikan kemampuan untuk melihat pendapatan yang dihasilkan dari layanan hotspot Anda. Aplikasi ini menghitung pendapatan berdasarkan jumlah pengguna, paket yang mereka beli, atau biaya yang ditetapkan untuk waktu penggunaan. Dengan informasi ini, Anda dapat menganalisis pendapatan Anda dan mengelola bisnis hotspot Anda dengan lebih efisien.
 
-## Fitur
+WMH menggunakan teknologi Ajax untuk memperbarui data secara real-time tanpa perlu me-refresh halaman. Ini memungkinkan Anda untuk melihat pembaruan data secara instan tanpa gangguan.
 
-- Fitur 1
-- Fitur 2
-- Fitur 3
-- ...
-
-## Demo
-
-Berikan tautan ke demo proyek atau tampilkan tangkapan layar dan cuplikan kode yang menjelaskan cara menggunakan proyek.
-
+Secara keseluruhan, WMH memberikan kemudahan dan kemampuan untuk memonitor dan mengelola hotspot online, pengguna hotspot, pengguna PPPoE, dan melihat pendapatan dari layanan yang Anda tawarkan. Aplikasi ini dapat meningkatkan efisiensi dan pengelolaan bisnis hotspot Anda dengan memberikan informasi yang relevan dan real-time.
+ 
 ## Instalasi 
 - clone repository 
 ```bash

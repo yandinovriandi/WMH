@@ -9,7 +9,7 @@
                 <span class="fw-500 text-primary">Tanggal & Waktu</span>
                 · <span id="tanggal"></span> · <span id="waktu"></span>
             </div>
-        </div> 
+        </div>
     </div>
 
     <div class="row">
