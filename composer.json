@@ -31,6 +31,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "app/Functions/formatByte.php"
+        ],
         "psr-4": {
             "Tests\\": "tests/"
         }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Hotspot\GetHotspotController;
 use App\Http\Controllers\MikrotikController;
 use App\Http\Controllers\Ppp\GetPppController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Routerboard\SystemController;
 use App\Http\Controllers\TestConnectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-secrets', [GetPppController::class, 'getAllPppSecrets'])->name('ppp.secrets');
     Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-active', [GetPppController::class, 'getAllPppActive'])->name('ppp.active');
 
+    Route::get('/mikrotik/resource/{mikrotik:slug}/get-resource',[SystemController::class,'routerResource'])->name('routerboard.resources');
 });
 
 require __DIR__.'/auth.php';

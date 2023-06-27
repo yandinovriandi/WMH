@@ -98,11 +98,10 @@
     <div class="row">
         <div class="col-lg-4">
            <div class="card">
-               <div class="card-header">Resource: RB1100AHx4</div>
+               <div  class="card-header">Resource: <span id="rbtype"></span></div>
                <div class="card-body">
                        <div class="mb-4">
-                           <h4 id="rbtype"></h4>
-                           <p>Uptime: <span id="uptime" class="badge badge-soft-danger font-size-12">12d 20:56:51</span> </p>
+                           <p>Uptime: <span id="uptime" class="badge bg-primary font-size-12">12d 20:56:51</span> </p>
                            <div>
                                Router OS : <span id="version">6.47.9 (long-term)</span>
                            </div>
@@ -121,20 +120,33 @@
                                Board name : <span id="boardname">RB1100AHx4</span>
                            </div>
                        </div>
+
                        <div class="pt-2">
                            <div class="custom-progess mb-5">
+                               <h4 class="small">
+                                  CPU
+                                   <span id="pCpu" class="float-end fw-bold">80%</span>
+                               </h4>
                                <div class="progress">
-                                   <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50% CPU </div>
+                                   <div id="cpu" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50% CPU </div>
                                </div>
                            </div>
                            <div class="custom-progess mb-5">
+                               <h4 class="small">
+                                   RAM
+                                   <span id="pRam" class="float-end fw-bold">80%</span>
+                               </h4>
                                <div class="progress">
-                                   <div id="memory" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 19%;">199.04MB/1GB</div>
+                                   <div id="memory" class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 19%;">199.04MB/1GB</div>
                                </div>
                            </div>
                            <div class="custom-progess mb-4">
+                               <h4 class="small">
+                                   HDD
+                                   <span id="pHdd" class="float-end fw-bold">80%</span>
+                               </h4>
                                <div class="progress">
-                                   <div id="hdd" class="progress-bar progress-bar-animated progress-bar-striped bg-info" role="progressbar" style="width: 41%;">52.88MB/128.25MB</div>
+                                   <div id="hdd" class="progress-bar progress-bar-animated progress-bar-striped bg-danger" role="progressbar" style="width: 41%;">52.88MB/128.25MB</div>
                                </div>
                            </div>
                        </div>
@@ -143,11 +155,24 @@
         </div>
 
         <div class="col-lg-8 mb-4">
-            <!-- Area chart example-->
             <div class="card mb-4">
-                <div class="card-header">Revenue Summary</div>
+                <div class="card-header">Traffic Interface</div>
                 <div class="card-body">
-                    <div class="chart-area"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div><canvas id="myAreaChart" width="675" height="240" style="display: block; width: 675px; height: 240px;" class="chartjs-render-monitor"></canvas></div>
+                    <div class="chart-area">
+                        <div class="chartjs-size-monitor">
+                            <div class="chartjs-size-monitor-expand">
+                                <div class="">
+
+                                </div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink">
+                                <div class="">
+
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="myAreaChart" width="675" height="240" style="display: block; width: 675px; height: 240px;" class="chartjs-render-monitor"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,16 +180,13 @@
     @pushonce('scripts')
         <script>
             $(document).ready(function() {
-                // Tampilkan loading saat memulai AJAX request
                 $("#loading").removeClass("d-none");
 
-                // AJAX request pertama
                 function updatePppActive() {
                     $.ajax({
                         url: "{{ route('ppp.active', ['mikrotik' => $mikrotik]) }}",
                         method: "GET",
                         success: function(response) {
-                            console.log(response)
                             const allPppActiveCount = response.allPppActiveCount;
                             $("#all-ppp-secrets-count").text(allPppActiveCount);
                         },
@@ -188,6 +210,39 @@
                     });
                 }
 
+                function updateSystemResources()
+                {
+                    $.ajax({
+                        url: "{{ route('routerboard.resources', ['mikrotik' => $mikrotik]) }}",
+                        method: "GET",
+                        success: function (response) {
+                            const resource = response.data[0];
+                            const memoryUse = resource.totalMemory - resource.freeMemory;
+                            const memoryPercentUse = Math.round(memoryUse / resource.totalMemory * 100);
+                            const hddUse = resource.totalHdd - resource.freeHdd;
+                            const hddPercentUse = Math.round(hddUse / resource.totalHdd * 100);
+                            $('#pCpu').html( resource.cpuLoad + '%');
+                            $('#cpu').css('width', resource.cpuLoad + '%').html(resource.cpuLoad + '%' + ' ' + resource.cpuFrequency + 'Mhz');
+                            $('#pRam').html( memoryPercentUse + '%');
+                            $('#memory').css('width', memoryPercentUse + '%').html(resource.memoryUsage + '/' + resource.totalMemorySpace);
+                            $('#pHdd').html(hddPercentUse + '%');
+                            $('#hdd').css('width', hddPercentUse + '%').html(resource.hddUsage + '/' + resource.totalHddSpace);
+                            $('#arc').html(resource.arc)
+                            $('#frequency').html(resource.cpuFrequency)
+                            $('#rbtype').html(resource.boardName)
+                            $('#boardname').html(resource.boardName)
+                            $('#version').html(resource.version)
+                            $('#uptime').html(formatUptime(resource.uptime))
+                            $('#cpuCount').html(resource.cpuCount)
+                        },
+                        global: false,
+                        dataType: 'json',
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+
                 function updateAllUsers() {
                     $.ajax({
                         url: "{{ route('hotspot.users', ['mikrotik' => $mikrotik]) }}",
@@ -204,8 +259,10 @@
                 updatePppActive();
                 updateHotspotActive();
                 updateAllUsers();
+                updateSystemResources()
 
                 setInterval(function() {
+                    updateSystemResources();
                     updatePppActive();
                     updateHotspotActive();
                 }, 10000);
@@ -215,5 +272,6 @@
                 });
             });
         </script>
+        @include('mikrotik.partial.resource')
     @endpushonce
 </x-mikrotik.app-mikrotik-layout>
