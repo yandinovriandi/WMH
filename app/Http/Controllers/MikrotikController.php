@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\GetIncomeResource;
 use App\Http\Resources\MikrotikResource;
 use App\Models\Mikrotik;
+use App\Services\Routerboard\GetIncomeService;
 use App\Services\Routerboard\HotspotService;
 use App\Services\Routerboard\SystemService;
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class MikrotikController extends Controller
 
     public function __construct(
         HotspotService $hotspotService,
-        SystemService $systemService
+        SystemService $systemService,
     )
     {
         $this->systemService = $systemService;

@@ -75,25 +75,25 @@
                     </a>
                 @endcan
                 <!-- Sidenav Heading (Custom)-->
-                {{--                <div class="sidenav-menu-heading">Layanan</div>--}}
-                {{--                <a class="nav-link {{ Request::is('tunnel*') ? 'active' : '' }} {{ Request::is('tunnel*') ? '' : 'collapsed' }}"--}}
-                {{--                   href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapTunnel"--}}
-                {{--                   aria-expanded="false" aria-controls="collapTunnel">--}}
-                {{--                    <div class="nav-link-icon"><i data-feather="repeat"></i></div><i class="fa-light fa-router"></i>--}}
-                {{--                    Layanan Tunnel VPN--}}
-                {{--                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>--}}
-                {{--                </a>--}}
-                {{--                <div class="collapse {{ Request::is('tunnels*') ? 'show' : '' }}" id="collapTunnel"--}}
-                {{--                     data-bs-parent="#accordionSidenav">--}}
-                {{--                    <nav class="sidenav-menu-nested nav">--}}
-                {{--                        <a class="nav-link {{ Request::is('tunnels/create') ? 'active' : '' }}"--}}
-                {{--                           href={{ route('tunnels.create') }}>Buat--}}
-                {{--                            Tunnel</a>--}}
-                {{--                        <a class="nav-link {{ Request::is('tunnels') ? 'active' : '' }}"--}}
-                {{--                           href={{ route('tunnels.index') }}>List--}}
-                {{--                            Tunnel</a>--}}
-                {{--                    </nav>--}}
-                {{--                </div>--}}
+                                <div class="sidenav-menu-heading">Manage</div>
+                                <a class="nav-link {{ Request::is('tunnel*') ? 'active' : '' }} {{ Request::is('tunnel*') ? '' : 'collapsed' }}"
+                                   href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapTunnel"
+                                   aria-expanded="false" aria-controls="collapTunnel">
+                                    <div class="nav-link-icon"><i data-feather="repeat"></i></div><i class="fa-light fa-router"></i>
+                                    Hotspot
+                                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse {{ Request::is('tunnels*') ? 'show' : '' }}" id="collapTunnel"
+                                     data-bs-parent="#accordionSidenav">
+                                    <nav class="sidenav-menu-nested nav">
+                                        <a class="nav-link {{ Request::is('tunnels/create') ? 'active' : '' }}"
+                                           href={{ url('tunnels.create') }}>Buat
+                                            Tunnel</a>
+                                        <a class="nav-link {{ Request::is('tunnels') ? 'active' : '' }}"
+                                           href={{ url('tunnels.index') }}>List
+                                            Tunnel</a>
+                                    </nav>
+                                </div>
             </div>
         </div>
         <!-- Sidenav Footer-->

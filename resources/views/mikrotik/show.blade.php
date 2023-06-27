@@ -206,7 +206,21 @@
                         }
                     });
                 }
-
+                function updateIncomeToday()
+                {
+                    $.ajax({
+                        url: "{{ route('income.today', ['mikrotik' => $mikrotik]) }}",
+                        method: "GET",
+                        success: function(response) {
+                            console.log(response)
+                            // const allUsers = response.allUsers;
+                            // $("#income-today").text(allUsers);
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
                 function updateSystemResources()
                 {
                     $.ajax({
@@ -357,17 +371,23 @@
                         }
                     });
                 }
+                updateIncomeToday();
                 updatePppActive();
                 updateHotspotActive();
                 updateAllUsers();
-                updateSystemResources()
+                updateSystemResources();
 
                 setInterval(function() {
-                    updateSystemResources();
                     updatePppActive();
                     updateHotspotActive();
+                }, 20000);
+                setInterval(function() {
+                    updateSystemResources();
                     updateChart();
                 }, 10000);
+                setInterval(function() {
+                    updateIncomeToday();
+                }, 40000);
 
                 $(document).ajaxStop(function() {
                     $("#loading").addClass("d-none");

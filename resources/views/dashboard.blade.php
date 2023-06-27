@@ -15,7 +15,6 @@
             </a>
         </div>
     </x-slot>
-
     <div class="row mt-4">
         <div class="col-xl-3 col-md-6 mb-4">
             <!-- Dashboard info widget 1-->
