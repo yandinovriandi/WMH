@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Routerboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RouterboardResource;
+use App\Http\Resources\RouterboardTimeResource;
+use App\Http\Resources\TrafficInterfaceResource;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\SystemService;
 use Illuminate\Http\Request;
@@ -33,6 +35,25 @@ class SystemController extends Controller
     {
         $router = $mikrotik;
         $spec = $this->systemService->getAllResources($router);
-        return $resources = RouterboardResource::collection($spec);
+        $resources = RouterboardResource::collection($spec);
+
+       $tm = $this->systemService->getTime($router);
+       $time = RouterboardTimeResource::collection($tm);
+        return response()->json([
+            'resources' => $resources,
+            'time' => $time,
+        ]);
+    }
+
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws BadCredentialsException
+     * @throws QueryException
+     * @throws ConfigException
+     */
+    public function mikrotikTrafficInterface(Mikrotik $mikrotik)
+    {
+        return $this->systemService->monitoringTraffic($mikrotik);
     }
 }

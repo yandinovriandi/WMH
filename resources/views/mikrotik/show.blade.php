@@ -6,15 +6,10 @@
         <div class="me-4 mb-3 mb-sm-0">
             <h1 class="mb-0">Dashboard router: {{$mikrotik->name}}</h1>
             <div class="small">
-                <span class="fw-500 text-primary">Friday</span>
-                · September 20, 2021 · 12:16 PM
+                <span class="fw-500 text-primary">Tanggal & Waktu</span>
+                · <span id="tanggal"></span> · <span id="waktu"></span>
             </div>
-        </div>
-        <!-- Date range picker example-->
-        <div class="input-group input-group-joined border-0 shadow" style="width: 16.5rem">
-            <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
-            <label for="litepickerRangePlugin"></label><input class="form-control ps-0 pointer" id="litepickerRangePlugin" placeholder="Select date range...">
-        </div>
+        </div> 
     </div>
 
     <div class="row">
@@ -96,7 +91,7 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 mb-4">
            <div class="card">
                <div  class="card-header">Resource: <span id="rbtype"></span></div>
                <div class="card-body">
@@ -156,23 +151,25 @@
 
         <div class="col-lg-8 mb-4">
             <div class="card mb-4">
-                <div class="card-header">Traffic Interface</div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class="chartjs-size-monitor">
-                            <div class="chartjs-size-monitor-expand">
-                                <div class="">
-
-                                </div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink">
-                                <div class="">
-
-                                </div>
-                            </div>
+                <div class="card-header">
+                    Traffic Interface
+                    <div class="float-end">
+                        <div class="input-group input-group-sm">
+                            <select id="interface" name="interface" class="form-select interfaceChange form-select-sm">
+                                @foreach($interfaces as $if)
+                                    <option value="{{$if['name']}}">{{$if['name']}}</option>
+                                @endforeach
+                            </select>
+                            <label for="interface" class="input-group-text">
+                                <span  class="text-success font-size-12 font-semibold">
+                                    <i class="fas fa-network-wired"></i>
+                                </span>
+                            </label>
                         </div>
-                        <canvas id="myAreaChart" width="675" height="240" style="display: block; width: 675px; height: 240px;" class="chartjs-render-monitor"></canvas>
                     </div>
+                </div>
+                <div class="card-body">
+                    <div class="apex-charts" id="chart" dir="ltr"></div>
                 </div>
             </div>
         </div>
@@ -216,11 +213,15 @@
                         url: "{{ route('routerboard.resources', ['mikrotik' => $mikrotik]) }}",
                         method: "GET",
                         success: function (response) {
-                            const resource = response.data[0];
+                            const waktu = response.time[0].time;
+                            const tanggal = response.time[0].date;
+                            const resource = response.resources[0];
                             const memoryUse = resource.totalMemory - resource.freeMemory;
                             const memoryPercentUse = Math.round(memoryUse / resource.totalMemory * 100);
                             const hddUse = resource.totalHdd - resource.freeHdd;
                             const hddPercentUse = Math.round(hddUse / resource.totalHdd * 100);
+                            $('#waktu').html(waktu);
+                            $('#tanggal').html(tanggal);
                             $('#pCpu').html( resource.cpuLoad + '%');
                             $('#cpu').css('width', resource.cpuLoad + '%').html(resource.cpuLoad + '%' + ' ' + resource.cpuFrequency + 'Mhz');
                             $('#pRam').html( memoryPercentUse + '%');
@@ -242,6 +243,106 @@
                         }
                     });
                 }
+
+                const options = {
+                    chart: {
+                        height: 400,
+                        type: "line",
+                        toolbar: {
+                            show: !1
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false,
+                        textAnchor: 'start',
+                        formatter: function (value) {
+                            const sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
+                            if (value === 0) return '0 bps';
+                            const i = parseInt(Math.floor(Math.log(value) / Math.log(1024)));
+                            return parseFloat((value / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
+                        },
+                    },
+                    series: [
+                        {name: 'Download', data: [], type: "area",},
+                        {name: 'Upload', data: [], type: "area",},
+                    ],
+                    title: {
+                        text: '',
+                    },
+                    yaxis: {
+                        labels: {
+                            formatter: function (value) {
+                                const sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
+                                if (value === 0) return '0 bps';
+                                const i = parseInt(Math.floor(Math.log(value) / Math.log(1024)));
+                                return parseFloat((value / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
+                            },
+                        },
+                    },
+                    colors: ["#0090fc", "#ff6666"],
+                    stroke: {
+                        curve: "smooth",
+                        width: 2,
+                        dashArray: [0, 0, 3]
+                    },
+                    fill: {
+                        type: "soft",
+                        opacity: [.15, .05, 1]
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (value) {
+                                const sizes = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps'];
+                                if (value === 0) return '0 bps';
+                                const i = parseInt(Math.floor(Math.log(value) / Math.log(1024)));
+                                return parseFloat((value / Math.pow(1024, i)).toFixed(2)) + ' ' + sizes[i];
+                            },
+                        }
+                    },
+                    markers: {
+                        size: 3,
+                        strokeWidth: 3,
+                        hover: {
+                            size: 4,
+                            sizeOffset: 2
+                        }
+                    },
+                    xaxis: {
+                        range: 15,
+                    },
+                    noData: {
+                        text: 'Waiting load data...'
+                    },
+                };
+                const chart = new ApexCharts(
+                    document.querySelector("#chart"),
+                    options
+                );
+                chart.render();
+                const updateChart = function () {
+                    const iface = $('#interface').val();
+                    const url = '{{route('mikrotik.traffic-interface',$mikrotik)}}';
+                    $.ajax({
+                        url: url,
+                        data: {
+                            'interface': iface
+                        },
+                        success: function (response) {
+                            chart.appendData([
+                                {
+                                    name: 'Download',
+                                    data: response[0].Rx
+                                },
+                                {
+                                    name: 'Upload',
+                                    data: response[0].Tx
+                                },
+                            ])
+                        },
+                        global: false,
+                        dataType: 'json',
+                    });
+                };
 
                 function updateAllUsers() {
                     $.ajax({
@@ -265,6 +366,7 @@
                     updateSystemResources();
                     updatePppActive();
                     updateHotspotActive();
+                    updateChart();
                 }, 10000);
 
                 $(document).ajaxStop(function() {
@@ -272,6 +374,7 @@
                 });
             });
         </script>
+        <script src="{{asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
         @include('mikrotik.partial.resource')
     @endpushonce
 </x-mikrotik.app-mikrotik-layout>

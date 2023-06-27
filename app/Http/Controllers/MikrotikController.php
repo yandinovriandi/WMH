@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\MikrotikResource;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\HotspotService;
+use App\Services\Routerboard\SystemService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -17,9 +18,14 @@ use RouterOS\Exceptions\QueryException;
 class MikrotikController extends Controller
 {
     private HotspotService $hotspotService;
+    private SystemService $systemService;
 
-    public function __construct(HotspotService $hotspotService)
+    public function __construct(
+        HotspotService $hotspotService,
+        SystemService $systemService
+    )
     {
+        $this->systemService = $systemService;
         $this->hotspotService = $hotspotService;
     }
 
@@ -65,6 +71,7 @@ class MikrotikController extends Controller
         }
     }
 
+
     /**
      * @throws ClientException
      * @throws ConnectException
@@ -74,7 +81,8 @@ class MikrotikController extends Controller
      */
     public function show(Mikrotik $mikrotik)
     {
-        return view('mikrotik.show', compact('mikrotik'));
+        $interfaces = $this->systemService->mikrotikInterface($mikrotik);
+        return view('mikrotik.show', compact('mikrotik','interfaces'));
     }
 
     public function edit(Mikrotik $mikrotik)
