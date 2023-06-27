@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Hotspot;
 use App\Http\Controllers\Controller;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\HotspotService;
-use Illuminate\Http\Request;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
 use RouterOS\Exceptions\ConfigException;

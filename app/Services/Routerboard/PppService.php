@@ -49,6 +49,7 @@ class PppService
     {
         $client = $this->getMikrotik($router);
         $query = new Query('/ppp/secret/print');
+
         return $client->query($query)->read();
     }
 
@@ -63,7 +64,7 @@ class PppService
     {
         $client = $this->getMikrotik($router);
         $query = new Query('/ppp/active/print');
+
         return $client->query($query)->read();
     }
-
 }

@@ -96,13 +96,52 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4 mb-4">
-            <div class="card mb-4">
-                <div class="card-body text-center p-5">
-
-                </div>
-            </div>
+        <div class="col-lg-4">
+           <div class="card">
+               <div class="card-header">Resource: RB1100AHx4</div>
+               <div class="card-body">
+                       <div class="mb-4">
+                           <h4 id="rbtype"></h4>
+                           <p>Uptime: <span id="uptime" class="badge badge-soft-danger font-size-12">12d 20:56:51</span> </p>
+                           <div>
+                               Router OS : <span id="version">6.47.9 (long-term)</span>
+                           </div>
+                           <div>
+                               CPU Frequency :
+                               <span id="frequency">1400</span>
+                               MHz
+                           </div>
+                           <div>
+                               CPU : <span id="cpuCount">4</span> Core
+                           </div>
+                           <div>
+                               Architecture : <span id="arc">arm</span>
+                           </div>
+                           <div>
+                               Board name : <span id="boardname">RB1100AHx4</span>
+                           </div>
+                       </div>
+                       <div class="pt-2">
+                           <div class="custom-progess mb-5">
+                               <div class="progress">
+                                   <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50% CPU </div>
+                               </div>
+                           </div>
+                           <div class="custom-progess mb-5">
+                               <div class="progress">
+                                   <div id="memory" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 19%;">199.04MB/1GB</div>
+                               </div>
+                           </div>
+                           <div class="custom-progess mb-4">
+                               <div class="progress">
+                                   <div id="hdd" class="progress-bar progress-bar-animated progress-bar-striped bg-info" role="progressbar" style="width: 41%;">52.88MB/128.25MB</div>
+                               </div>
+                           </div>
+                       </div>
+               </div>
+           </div>
         </div>
+
         <div class="col-lg-8 mb-4">
             <!-- Area chart example-->
             <div class="card mb-4">
@@ -176,6 +215,5 @@
                 });
             });
         </script>
-
     @endpushonce
 </x-mikrotik.app-mikrotik-layout>

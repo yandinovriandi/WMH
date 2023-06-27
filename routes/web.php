@@ -24,12 +24,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-//    response request
-    Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-hotspot-active',[GetHotspotController::class,'getCountActive'])->name('hotspot.count');
-    Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-all-users',[GetHotspotController::class,'getAllUsers'])->name('hotspot.users');
+    //    response request
+    Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-hotspot-active', [GetHotspotController::class, 'getCountActive'])->name('hotspot.count');
+    Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-all-users', [GetHotspotController::class, 'getAllUsers'])->name('hotspot.users');
 
-    Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-secrets',[GetPppController::class,'getAllPppSecrets'])->name('ppp.secrets');
-    Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-active',[GetPppController::class,'getAllPppActive'])->name('ppp.active');
+    Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-secrets', [GetPppController::class, 'getAllPppSecrets'])->name('ppp.secrets');
+    Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-active', [GetPppController::class, 'getAllPppActive'])->name('ppp.active');
 
 });
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Hotspot\UserResource;
 use App\Http\Resources\MikrotikResource;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\HotspotService;

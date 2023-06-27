@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Ppp;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mikrotik;
-use App\Services\Routerboard\HotspotService;
 use App\Services\Routerboard\PppService;
-use Illuminate\Http\Request;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
 use RouterOS\Exceptions\ConfigException;

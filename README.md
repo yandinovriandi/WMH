@@ -77,4 +77,4 @@ Kami menyambut kontribusi dari komunitas. Jika Anda ingin berkontribusi, ikuti l
 Anda dapat merubah kode apapun tapi jangan hilangkan link repo kode ini berasal.
 
 ---
-Dibuat oleh [yandi novriandi](https://github.com/yandinovriandi/WMH.git)
+Dibuat oleh [yandi novriandi](https://github.com/yandinovriandi)
