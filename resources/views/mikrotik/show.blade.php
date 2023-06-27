@@ -7,7 +7,7 @@
             <h1 class="mb-0">Dashboard router: {{$mikrotik->name}}</h1>
             <div class="small">
                 <span class="fw-500 text-primary">Friday</span>
-                · September 20, 2021 · 12:16 PM
+                · Juni 27, 2023 · 12:16 PM
             </div>
         </div>
         <!-- Date range picker example-->
