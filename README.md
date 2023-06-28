@@ -46,6 +46,7 @@ php artisan serve
 ## Penggunaan
 
 Sedang dalam persiapan.
+![Screenshot 2023-06-27 at 23.08.56.png](..%2F..%2FDesktop%2FScreenshot%202023-06-27%20at%2023.08.56.png)
 
 ## Kontribusi
 
