@@ -62,6 +62,7 @@ Kami menyambut kontribusi dari komunitas. Jika Anda ingin berkontribusi, ikuti l
 ## Lisensi
 
 Anda dapat merubah kode apapun tapi jangan hilangkan link repo kode ini berasal.
-
+---
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/yandinovriandi)
 ---
 Dibuat oleh [yandi novriandi](https://github.com/yandinovriandi)
