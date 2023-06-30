@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Wifi Management'),
+    'name' => env('APP_NAME', 'WifiManagement'),
 
     /*
     |--------------------------------------------------------------------------
