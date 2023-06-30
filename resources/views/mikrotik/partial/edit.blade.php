@@ -10,7 +10,7 @@
                         <label for="edit_nameRouter">{{ __('hotspot.router-name') }}</label>
                         <input
                             class="form-control"
-                            id="edit_nameRouter" name="name" type="text" placeholder="{{ __('hotspot.router-name) }}"
+                            id="edit_nameRouter" name="name" type="text" placeholder="{{ __('hotspot.router-name') }}"
                             value="{{ old('name') }}"
                         >
                         <div id="error_edit_nameRouter"></div>
