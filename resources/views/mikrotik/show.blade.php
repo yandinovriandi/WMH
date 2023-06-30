@@ -213,8 +213,8 @@
                         method: "GET",
                         success: function(response) {
                             console.log(response)
-                            // const allUsers = response.allUsers;
-                            // $("#income-today").text(allUsers);
+                            // const incomeToday = response.incomeToday;
+                            // $("#income-today").text(incomeToday);
                         },
                         error: function(xhr, status, error) {
                             console.error(error);
@@ -234,6 +234,7 @@
                             const memoryPercentUse = Math.round(memoryUse / resource.totalMemory * 100);
                             const hddUse = resource.totalHdd - resource.freeHdd;
                             const hddPercentUse = Math.round(hddUse / resource.totalHdd * 100);
+
                             $('#waktu').html(waktu);
                             $('#tanggal').html(tanggal);
                             $('#pCpu').html( resource.cpuLoad + '%');
@@ -247,7 +248,7 @@
                             $('#rbtype').html(resource.boardName)
                             $('#boardname').html(resource.boardName)
                             $('#version').html(resource.version)
-                            $('#uptime').html(formatUptime(resource.uptime))
+                            $('#uptime').html(response.uptime)
                             $('#cpuCount').html(resource.cpuCount)
                         },
                         global: false,
@@ -325,7 +326,7 @@
                         range: 15,
                     },
                     noData: {
-                        text: 'Waiting load data...'
+                        text: 'Loading data...'
                     },
                 };
                 const chart = new ApexCharts(
@@ -371,23 +372,31 @@
                         }
                     });
                 }
-                updateIncomeToday();
-                updatePppActive();
-                updateHotspotActive();
-                updateAllUsers();
-                updateSystemResources();
+                async function updateData() {
+                    // await updateIncomeToday();
+                    await updatePppActive();
+                    await updateHotspotActive();
+                    await updateAllUsers();
+                    await updateSystemResources();
+                }
+
+                updateData()
+                    .then(() => {
+                        console.log("Data update completed.");
+                    })
+                    .catch((error) => {
+                        console.error("An error occurred while updating data:", error);
+                    });
 
                 setInterval(function() {
                     updatePppActive();
                     updateHotspotActive();
-                }, 20000);
-                setInterval(function() {
                     updateSystemResources();
                     updateChart();
                 }, 10000);
-                setInterval(function() {
-                    updateIncomeToday();
-                }, 40000);
+                // setInterval(function() {
+                //     updateIncomeToday();
+                // }, 40000);
 
                 $(document).ajaxStop(function() {
                     $("#loading").addClass("d-none");

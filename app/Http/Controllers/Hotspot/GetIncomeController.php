@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Hotspot;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\GetIncomeResource;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\GetIncomeService;
-use Illuminate\Http\Request;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
 use RouterOS\Exceptions\ConfigException;
@@ -16,12 +14,12 @@ use RouterOS\Exceptions\QueryException;
 class GetIncomeController extends Controller
 {
     private GetIncomeService $getIncomeService;
+
     private SystemService $systemService;
 
     public function __construct(
         GetIncomeService $getIncomeService,
-    )
-    {
+    ) {
         $this->getIncomeService = $getIncomeService;
     }
 
@@ -33,18 +31,18 @@ class GetIncomeController extends Controller
      * @throws ConfigException
      */
     public function todayIncome(Mikrotik $mikrotik)
-   {
-       $router = $mikrotik;
-       $incomeToday = $this->getIncomeService->dayIncome($router);
-       $totalIncomeValue = 0;
+    {
+        $router = $mikrotik;
+        $incomeToday = $this->getIncomeService->dayIncome($router);
+        $totalIncomeValue = 0;
 
-       foreach ($incomeToday as $item) {
-           $incomeValue = $item['incomeValue'];
-           $totalIncomeValue += intval($incomeValue);
-       }
+        foreach ($incomeToday as $item) {
+            $incomeValue = $item['incomeValue'];
+            $totalIncomeValue += intval($incomeValue);
+        }
 
-       return response()->json([
-           'totalIncomeValue' => $totalIncomeValue
-       ]);
-   }
+        return response()->json([
+            'totalIncomeValue' => $totalIncomeValue,
+        ]);
+    }
 }

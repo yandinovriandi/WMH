@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Routerboard;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RouterboardResource;
 use App\Http\Resources\RouterboardTimeResource;
-use App\Http\Resources\TrafficInterfaceResource;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\SystemService;
-use Illuminate\Http\Request;
 use RouterOS\Exceptions\BadCredentialsException;
 use RouterOS\Exceptions\ClientException;
 use RouterOS\Exceptions\ConfigException;
@@ -37,8 +35,9 @@ class SystemController extends Controller
         $spec = $this->systemService->getAllResources($router);
         $resources = RouterboardResource::collection($spec);
 
-       $tm = $this->systemService->getTime($router);
-       $time = RouterboardTimeResource::collection($tm);
+        $tm = $this->systemService->getTime($router);
+        $time = RouterboardTimeResource::collection($tm);
+
         return response()->json([
             'resources' => $resources,
             'time' => $time,
@@ -55,5 +54,24 @@ class SystemController extends Controller
     public function mikrotikTrafficInterface(Mikrotik $mikrotik)
     {
         return $this->systemService->monitoringTraffic($mikrotik);
+    }
+
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws QueryException
+     * @throws BadCredentialsException
+     * @throws ConfigException
+     */
+    public function getTimeRouter(Mikrotik $mikrotik)
+    {
+        $router = $mikrotik;
+
+        $tm = $this->systemService->getTime($router);
+        $time = RouterboardTimeResource::collection($tm);
+
+        return response()->json([
+            'time' => $time,
+        ]);
     }
 }

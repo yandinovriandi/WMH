@@ -48,11 +48,12 @@ class GetIncomeService
     public function dayIncome($router)
     {
         $currentDate = now();
-        $formattedDate = $currentDate->format("M/d/Y");
-       $sekarang = strtolower($formattedDate);
+        $formattedDate = $currentDate->format('M/d/Y');
+        $sekarang = strtolower($formattedDate);
         $client = $this->getMikrotik($router);
         $getSRHr = (new Query('/system/script/print'))
-        ->where('?source',$sekarang);
+            ->where('?source', $sekarang);
+
         return $client->query($getSRHr)->read();
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\GetIncomeResource;
+use App\Http\Resources\HealthResource;
 use App\Http\Resources\MikrotikResource;
 use App\Models\Mikrotik;
-use App\Services\Routerboard\GetIncomeService;
 use App\Services\Routerboard\HotspotService;
 use App\Services\Routerboard\SystemService;
 use Illuminate\Http\Request;
@@ -20,13 +19,13 @@ use RouterOS\Exceptions\QueryException;
 class MikrotikController extends Controller
 {
     private HotspotService $hotspotService;
+
     private SystemService $systemService;
 
     public function __construct(
         HotspotService $hotspotService,
         SystemService $systemService,
-    )
-    {
+    ) {
         $this->systemService = $systemService;
         $this->hotspotService = $hotspotService;
     }
@@ -73,7 +72,6 @@ class MikrotikController extends Controller
         }
     }
 
-
     /**
      * @throws ClientException
      * @throws ConnectException
@@ -84,7 +82,7 @@ class MikrotikController extends Controller
     public function show(Mikrotik $mikrotik)
     {
         $interfaces = $this->systemService->mikrotikInterface($mikrotik);
-        return view('mikrotik.show', compact('mikrotik','interfaces'));
+        return view('mikrotik.show', compact('mikrotik', 'interfaces'));
     }
 
     public function edit(Mikrotik $mikrotik)

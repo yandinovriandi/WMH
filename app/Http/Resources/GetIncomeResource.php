@@ -14,9 +14,10 @@ class GetIncomeResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $incomeValue = explode("-|-", $this['name'])[3];
+        $incomeValue = explode('-|-', $this['name'])[3];
+
         return [
-            'incomeValue' => $incomeValue
+            'incomeValue' => $incomeValue,
         ];
     }
 }
