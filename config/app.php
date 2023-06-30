@@ -16,8 +16,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
-
+    'name' => env('APP_NAME', 'WifiManagement'),
+    'version' => 'v1.0',
+    
     /*
     |--------------------------------------------------------------------------
     | Application Environment

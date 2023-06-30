@@ -12,7 +12,7 @@ use App\Http\Controllers\Routerboard\SystemController;
 use App\Http\Controllers\TestConnectionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', HomeController::class)->name('home');
+Route::redirect('/', '/login');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');

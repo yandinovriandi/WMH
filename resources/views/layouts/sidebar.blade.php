@@ -24,7 +24,7 @@
                 <!-- Sidenav Accordion (Dashboard)-->
                 <a class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}" href={{ route('dashboard') }}>
                     <div class="nav-link-icon"><i data-feather="activity"></i></div>
-                    Dashboards
+                    Dashboard
                 </a>
 {{--                @can('is_admin')--}}
 {{--                    <a class="nav-link {{ Request::is('server*') ? 'active' : '' }}" href={{ route('server.index') }}>--}}
