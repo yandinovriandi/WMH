@@ -2,18 +2,18 @@
 
 namespace App\View\Components\Mikrotik;
 
+use App\Models\Mikrotik;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class SidebarMikrotikLayout extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $mikrotik;
+
+    public function __construct(Mikrotik $mikrotik)
     {
-        //
+        $this->mikrotik = $mikrotik;
     }
 
     /**
@@ -21,6 +21,8 @@ class SidebarMikrotikLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.mikrotik.sidebar');
+        return view('layouts.mikrotik.sidebar',[
+            'mikrotik' => $this->mikrotik
+        ]);
     }
 }

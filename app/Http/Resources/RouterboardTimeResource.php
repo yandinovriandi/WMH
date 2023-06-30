@@ -17,7 +17,7 @@ class RouterboardTimeResource extends JsonResource
         return [
             'time' => $this['time'],
             'date' => $this['date'],
-            'timeZone' => $this['time-zone-autodetect']
+            'timeZone' => $this['time-zone-autodetect'],
         ];
     }
 }

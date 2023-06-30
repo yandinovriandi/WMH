@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Hotspot\GetHotspotController;
 use App\Http\Controllers\Hotspot\GetIncomeController;
+use App\Http\Controllers\Hotspot\VoucherController;
 use App\Http\Controllers\MikrotikController;
 use App\Http\Controllers\Ppp\GetPppController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/vouchers/{mikrotik:slug}/lists', [VoucherController::class, 'voucher'])->name('voucher.list');
+
     //    response request
     Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-hotspot-active', [GetHotspotController::class, 'getCountActive'])->name('hotspot.count');
     Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-all-users', [GetHotspotController::class, 'getAllUsers'])->name('hotspot.users');
@@ -33,10 +36,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-secrets', [GetPppController::class, 'getAllPppSecrets'])->name('ppp.secrets');
     Route::get('/mikrotik/ppp/{mikrotik:slug}/get-all-ppp-active', [GetPppController::class, 'getAllPppActive'])->name('ppp.active');
 
-    Route::get('/mikrotik/resource/{mikrotik:slug}/get-resource',[SystemController::class,'routerResource'])->name('routerboard.resources');
-    Route::get('/mikrotik/traffic/{mikrotik:slug}/get-monitoring',[SystemController::class,'mikrotikTrafficInterface'])->name('mikrotik.traffic-interface');
+    Route::get('/mikrotik/resource/{mikrotik:slug}/get-resource', [SystemController::class, 'routerResource'])->name('routerboard.resources');
+    Route::get('/mikrotik/traffic/{mikrotik:slug}/get-monitoring', [SystemController::class, 'mikrotikTrafficInterface'])->name('mikrotik.traffic-interface');
+    Route::get('/mikrotik/{mikrotik:slug}/time',[SystemController::class,'getTimeRouter'])->name('mikrotik.time');
 
-    Route::get('/mikrotik/income/{mikrotik:slug}/income-today',[GetIncomeController::class,'todayIncome'])->name('income.today');
+    Route::get('/mikrotik/income/{mikrotik:slug}/income-today', [GetIncomeController::class, 'todayIncome'])->name('income.today');
 });
 
 require __DIR__.'/auth.php';

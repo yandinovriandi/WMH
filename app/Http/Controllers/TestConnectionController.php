@@ -50,7 +50,7 @@ class TestConnectionController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Terhubung ⇌ '.$response[0]['board-name'],
+                'title' => $response[0]['board-name'].' ⇌ CONECTED',
                 'text' => 'Silahkan lanjutkan proses penambahan router!',
                 'boardName' => $response[0]['board-name'],
             ]);
@@ -71,7 +71,7 @@ class TestConnectionController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Status ⇌ '.$response[0]['board-name'].'⇌ Online',
+                'title' =>  $router->name.' ⇌ CONECTED',
                 'text' => 'Router ⇌'.$response[0]['board-name'].'⇌ Online',
                 'boardName' => $response[0]['board-name'],
             ]);

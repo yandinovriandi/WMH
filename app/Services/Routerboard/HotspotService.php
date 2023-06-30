@@ -67,4 +67,18 @@ class HotspotService
 
         return $client->query($query)->read();
     }
+
+    /**
+     * @throws ClientException
+     * @throws ConnectException
+     * @throws BadCredentialsException
+     * @throws QueryException
+     * @throws ConfigException
+     */
+    public function getHotspotVouchers($router)
+    {
+        $client = $this->getMikrotik($router);
+        $query = new Query('/ip/hotspot/user/print');
+        return $client->query($query)->read();
+    }
 }

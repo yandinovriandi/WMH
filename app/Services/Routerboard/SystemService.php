@@ -87,6 +87,7 @@ class SystemService
             ->equal('once');
         $tf = $client->query($eth)->read();
         $traffic = TrafficInterfaceResource::collection($tf);
+
         return response()->json($traffic);
     }
 
@@ -102,6 +103,8 @@ class SystemService
         $router = $mikrotik;
         $client = $this->getMikrotik($router);
         $inf = new Query('/interface/print');
+
         return $client->query($inf)->read();
     }
+
 }

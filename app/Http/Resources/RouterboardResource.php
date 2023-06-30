@@ -32,7 +32,7 @@ class RouterboardResource extends JsonResource
             'freeHddSpace' => formatByte($this['free-hdd-space']),
             'totalHddSpace' => formatByte($this['total-hdd-space']),
             'hddUsage' => formatByte($this['total-hdd-space'] - $this['free-hdd-space']),
-            'memoryUsage' => formatByte($this['total-memory']-$this['free-memory']),
+            'memoryUsage' => formatByte($this['total-memory'] - $this['free-memory']),
         ];
     }
 }
