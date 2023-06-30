@@ -5,13 +5,13 @@
                 <div class="page-header-icon">
                     <i data-feather='sun'></i>
                 </div>
-                Hai, {{ auth()->user()->name }}
+                {{ __('dashboard.welcome-user', ['user' => auth()->user()->name] )}}
             </h1>
         </div>
         <div class="col-12 col-xl-auto mb-3">
             <a class="btn btn-sm btn-light text-primary add-router"
                href="javascript:void(0)">
-                <i data-feather='plus-circle' class="me-1"></i> add router
+                <i data-feather='plus-circle' class="me-1"></i> {{ __('dashboard.new-router') }}
             </a>
         </div>
     </x-slot>
@@ -22,14 +22,14 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <div class="small fw-bold text-primary mb-1">Total Router</div>
+                            <div class="small fw-bold text-primary mb-1">{{ __('dashboard.total-router') }}</div>
                             <div class="h5">
                                 <span id="mikrotiksCount" class="badge bg-blue-soft text-primary rounded-pill">
                                     {{auth()->user()->mikrotiks()->count()}}
                                 </span>
                             </div>
                             <div class="text-xs fw-bold text-success d-inline-flex align-items-center">
-                                <i class="fas fa-network-wired me-1"></i> Connected
+                                <i class="fas fa-network-wired me-1"></i> {{ __('dashboard.connected') }}
                             </div>
                         </div>
                         <div class="ms-2">
@@ -48,11 +48,11 @@
                             <div class="small fw-bold text-success mb-1">
                                 Wifi Management Hotspot
                             </div>
-                            <div class="h5">
-                                FREE EDITION
-                            </div>
+                            <h5 class="h5 text-uppercase">
+                                {{ __('dashboard.free-edition') }}
+                            </h5>
                             <div class="text-xs fw-bold text-danger d-inline-flex align-items-center">
-                                v 0.1
+                                {{ config('app.version', 'ALPHA') }}
                             </div>
                         </div>
                         <div class="ms-2">
@@ -66,7 +66,7 @@
         <div class="card-shadow">
             <div class="card">
                 <div class="card-header">
-                    You'r Router
+                    {{ __('dashboard.router-list') }}
                 </div>
                 <div class="card-body">
                     <table id="mikrotiksTable" class="table  datatable-loading no-footer sortable searchable">
