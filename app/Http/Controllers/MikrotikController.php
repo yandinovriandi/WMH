@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\HealthResource;
 use App\Http\Resources\MikrotikResource;
 use App\Models\Mikrotik;
 use App\Services\Routerboard\HotspotService;
@@ -82,6 +81,7 @@ class MikrotikController extends Controller
     public function show(Mikrotik $mikrotik)
     {
         $interfaces = $this->systemService->mikrotikInterface($mikrotik);
+
         return view('mikrotik.show', compact('mikrotik', 'interfaces'));
     }
 

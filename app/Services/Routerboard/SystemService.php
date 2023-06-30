@@ -106,5 +106,4 @@ class SystemService
 
         return $client->query($inf)->read();
     }
-
 }

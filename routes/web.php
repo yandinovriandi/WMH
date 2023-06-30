@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Hotspot\GetHotspotController;
 use App\Http\Controllers\Hotspot\GetIncomeController;
 use App\Http\Controllers\Hotspot\VoucherController;
@@ -51,7 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/mikrotik/resource/{mikrotik:slug}/get-resource', [SystemController::class, 'routerResource'])->name('routerboard.resources');
     Route::get('/mikrotik/traffic/{mikrotik:slug}/get-monitoring', [SystemController::class, 'mikrotikTrafficInterface'])->name('mikrotik.traffic-interface');
-    Route::get('/mikrotik/{mikrotik:slug}/time',[SystemController::class,'getTimeRouter'])->name('mikrotik.time');
+    Route::get('/mikrotik/{mikrotik:slug}/time', [SystemController::class, 'getTimeRouter'])->name('mikrotik.time');
 
     Route::get('/mikrotik/income/{mikrotik:slug}/income-today', [GetIncomeController::class, 'todayIncome'])->name('income.today');
 });

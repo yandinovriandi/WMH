@@ -79,6 +79,7 @@ class HotspotService
     {
         $client = $this->getMikrotik($router);
         $query = new Query('/ip/hotspot/user/print');
+
         return $client->query($query)->read();
     }
 }

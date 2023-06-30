@@ -71,7 +71,7 @@ class TestConnectionController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' =>  $router->name.' ⇌ CONECTED',
+                'title' => $router->name.' ⇌ CONECTED',
                 'text' => 'Router ⇌'.$response[0]['board-name'].'⇌ Online',
                 'boardName' => $response[0]['board-name'],
             ]);

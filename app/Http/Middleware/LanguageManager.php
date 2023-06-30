@@ -20,7 +20,7 @@ class LanguageManager
             $locale = session()->get('locale');
             App::setLocale($locale);
         }
-        
+
         return $next($request);
     }
 }

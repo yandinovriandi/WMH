@@ -23,7 +23,7 @@ class VoucherResource extends JsonResource
             'upload' => $this['bytes-in'],
             'download' => $this['bytes-out'],
             'status' => $this['disabled'] ?? null,
-            'comment' => $this['comment'] ?? null
+            'comment' => $this['comment'] ?? null,
         ];
     }
 }

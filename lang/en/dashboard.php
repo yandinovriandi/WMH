@@ -6,5 +6,5 @@ return [
     'total-router' => 'Total router',
     'connected' => 'Connected',
     'free-edition' => 'Free edition',
-    'router-list' => 'Router list'
+    'router-list' => 'Router list',
 ];

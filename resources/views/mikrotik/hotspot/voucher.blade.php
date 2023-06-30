@@ -47,19 +47,21 @@
                                 <th>Password</th>
                                 <th>Profile</th>
                                 <th>Uptime</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
-{{--                            <tbody>--}}
-{{--                            @foreach($vouchers as $voucher)--}}
-{{--                                <tr>--}}
-{{--                                    <td>{{$loop->iteration}}</td>--}}
-{{--                                    <td>{{ $voucher['name'] }}</td>--}}
-{{--                                    <td>{{ $voucher['password'] ?? 'no data' }}</td>--}}
-{{--                                    <td>{{ $voucher['profile'] ?? 'no data' }}</td>--}}
-{{--                                    <td>{{ $voucher['uptime'] ?? 'no data' }}</td>--}}
-{{--                                </tr>--}}
-{{--                            @endforeach--}}
-{{--                            </tbody>--}}
+                            <tbody>
+                            @foreach($vouchers as $voucher)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{ $voucher['name'] }}</td>
+                                    <td>{{ $voucher['password'] ?? 'no data' }}</td>
+                                    <td>{{ $voucher['profile'] ?? 'no data' }}</td>
+                                    <td>{{ $voucher['uptime'] ?? 'no data' }}</td>
+                                    <td>{{ $voucher['status'] ?? 'active' }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -71,46 +73,46 @@
         <script>
             $(document).ready(function() {
                 $('#vouchersTable').DataTable({
-                    responsive: true,
-                    processing: true,
-                    serverSide: true,
-                    searchDelay: 500,
-                    ajax: {
-                        url: "{{ route('voucher.list', $mikrotik) }}"
-                    },
-                    columns: [
-                        { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
-                        // { data: 'id', name: 'id' },
-                        // { data: 'username', name: 'username' },
-                        {
-                            "data": "username",
-                            "defaultContent": ""
-                        },
-                        {
-                            "data": "password",
-                            "defaultContent": ""
-                        },
-                        {
-                            "data": "profile",
-                            "defaultContent": ""
-                        },
-                        {
-                            "data": "upload",
-                            "defaultContent": ""
-                        },
-                        {
-                            "data": "download",
-                            "defaultContent": ""
-                        },
-                        // { data: 'password', name: 'password' },
-                        // { data: 'profile', name: 'profile' },
-                        { data: 'uptime', name: 'uptime' },
-                        // { data: 'upload', name: 'upload' },
-                        // { data: 'download', name: 'download' },
-                        // { data: 'status', name: 'status' },
-                        // { data: 'comment', name: 'comment' },
-                        // Add more columns as needed
-                    ]
+                    // responsive: true,
+                    // processing: true,
+                    // serverSide: true,
+                    // searchDelay: 500,
+                    {{--ajax: {--}}
+                    {{--    url: "{{ route('voucher.list', $mikrotik) }}"--}}
+                    {{--},--}}
+                    {{--columns: [--}}
+                    //     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                    {{--    // { data: 'id', name: 'id' },--}}
+                    {{--    // { data: 'username', name: 'username' },--}}
+                    {{--    {--}}
+                    {{--        "data": "username",--}}
+                    {{--        "defaultContent": ""--}}
+                    {{--    },--}}
+                    {{--    {--}}
+                    {{--        "data": "password",--}}
+                    {{--        "defaultContent": ""--}}
+                    {{--    },--}}
+                    {{--    {--}}
+                    {{--        "data": "profile",--}}
+                    {{--        "defaultContent": ""--}}
+                    {{--    },--}}
+                    {{--    {--}}
+                    {{--        "data": "upload",--}}
+                    {{--        "defaultContent": ""--}}
+                    {{--    },--}}
+                    {{--    {--}}
+                    {{--        "data": "download",--}}
+                    {{--        "defaultContent": ""--}}
+                    {{--    },--}}
+                    {{--    // { data: 'password', name: 'password' },--}}
+                    {{--    // { data: 'profile', name: 'profile' },--}}
+                    {{--    { data: 'uptime', name: 'uptime' },--}}
+                    {{--    // { data: 'upload', name: 'upload' },--}}
+                    {{--    // { data: 'download', name: 'download' },--}}
+                    {{--    // { data: 'status', name: 'status' },--}}
+                    {{--    // { data: 'comment', name: 'comment' },--}}
+                    {{--    // Add more columns as needed--}}
+                    {{--]--}}
                 });
 
                 function updateTime() {

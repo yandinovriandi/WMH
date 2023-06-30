@@ -21,8 +21,8 @@ class SidebarMikrotikLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.mikrotik.sidebar',[
-            'mikrotik' => $this->mikrotik
+        return view('layouts.mikrotik.sidebar', [
+            'mikrotik' => $this->mikrotik,
         ]);
     }
 }
