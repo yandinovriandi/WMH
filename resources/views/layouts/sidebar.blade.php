@@ -111,7 +111,7 @@
 {{--                            Tunnel</a>--}}
 {{--                    </nav>--}}
 {{--                </div>--}}
-                <div class="sidenav-menu-heading">Profile</div>
+                <div class="sidenav-menu-heading">Setting</div>
                 <a class="nav-link {{ Request::is('profile*') ? 'active' : '' }} {{ Request::is('profile*') ? '' : 'collapsed' }}"
                    href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapseProfile"
                    aria-expanded="false" aria-controls="collapseProfile">

@@ -10,12 +10,25 @@ use App\Http\Controllers\Ppp\GetPppController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Routerboard\SystemController;
 use App\Http\Controllers\TestConnectionController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+
+$supported_language = ['en' ,'id'];
 
 Route::redirect('/', '/login');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('lang/update/{locale}', function ($locale) {
+        if ($locale) {
+            App::setLocale($locale);
+            session()->put('locale', $locale);
+            // dd(session()->all());
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('dashboard');
+        }
+    })->name('update-language');
 
     Route::get('mikrotiks/{mikrotik:slug}', [MikrotikController::class, 'show'])->name('mikrotiks.show');
     Route::resource('mikrotiks', MikrotikController::class);
