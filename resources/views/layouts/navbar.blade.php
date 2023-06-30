@@ -32,7 +32,7 @@
                     Account
                 </a>
 
-                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#!">
+                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal" href="#">
                     <div class="dropdown-item-icon"><i data-feather="log-out"></i></div>
                     Logout
                 </a>
