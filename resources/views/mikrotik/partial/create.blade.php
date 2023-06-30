@@ -7,10 +7,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="nameRouter">Identitas Router</label>
+                        <label for="nameRouter">{{ __('hotspot.router-name') }}</label>
                         <input
                             class="form-control"
-                            id="nameRouter" name="name" type="text" placeholder="Identitas Router/Identity"
+                            id="nameRouter" name="name" type="text" placeholder="{{ __('hotspot.router-name') }}"
                             value="{{ old('name') }}"
                         >
                         <div id="error_nameRouter"></div>
@@ -57,16 +57,16 @@
                                 <input class="form-check-input" type="checkbox" id="checkConnection">
                                 <input type="hidden" id="is_connected" name="is_connected" value="0">
                                 <label class="form-check-label" for="checkConnection">
-                                    Test koneksi ke router
+                                    {{ __('hotspot.test-connection') }}
                                 </label>
                             </div>
                             <div id="badge-connected" class="d-none"></div>
                         </div>
                     </div>
 {{--                    <div class="mb-3">--}}
-{{--                        <label class="small mb-1">Lokasi Server</label>--}}
+{{--                        <label class="small mb-1">{{ __('hotspot.server-location') }}</label>--}}
 {{--                        <select class="form-select " name="server_location_id" id="server_location_id_router" aria-label="Default select example">--}}
-{{--                            <option selected="" disabled="">Pilih lokasi server:</option>--}}
+{{--                            <option selected="" disabled="">{{ __('hotspot.choice-server-location') }}:</option>--}}
 {{--                            @foreach($serverLocations as $sl)--}}
 {{--                                <option value="{{$sl->id}}">{{$sl->name}} - {{$sl->address}}</option>--}}
 {{--                            @endforeach--}}
@@ -75,7 +75,7 @@
 {{--                    </div>--}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="simpan-router" class="btn btn-sm btn-primary">Simpan</button>
+                    <button type="button" id="simpan-router" class="btn btn-sm btn-primary">{{ __('hotspot.save') }}</button>
                 </div>
             </form>
         </div>

@@ -3,14 +3,14 @@
         <div class="modal-content">
             <form id="editRouterForm" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editRouterModalTitle">Edit Role</h5>
+                    <h5 class="modal-title" id="editRouterModalTitle">{{ __('hotspot.edit-role') }}</h5>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="edit_nameRouter">Identitas Router</label>
+                        <label for="edit_nameRouter">{{ __('hotspot.router-name') }}</label>
                         <input
                             class="form-control"
-                            id="edit_nameRouter" name="name" type="text" placeholder="Identitas Router/Identity"
+                            id="edit_nameRouter" name="name" type="text" placeholder="{{ __('hotspot.router-name) }}"
                             value="{{ old('name') }}"
                         >
                         <div id="error_edit_nameRouter"></div>
@@ -52,9 +52,9 @@
                         <div id="error_edit_portRouter"></div>
                     </div>
 {{--                    <div class="mb-3">--}}
-{{--                        <label class="small mb-1">Lokasi Server</label>--}}
+{{--                        <label class="small mb-1">{{ __('hotspot.server-location') }}</label>--}}
 {{--                        <select class="form-select " name="server_location_id" id="edit_server_location_id_router" aria-label="Default select example">--}}
-{{--                            <option selected="" disabled="">Pilih lokasi server:</option>--}}
+{{--                            <option selected="" disabled="">{{ __('hotspot.choice-server-location') }}:</option>--}}
 {{--                            @foreach($serverLocations as $sl)--}}
 {{--                                <option value="{{$sl->id}}">{{$sl->name}} - {{$sl->address}}</option>--}}
 {{--                            @endforeach--}}
@@ -63,7 +63,7 @@
 {{--                    </div>--}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="update-router" class="btn btn-sm btn-primary">Simpan</button>
+                    <button type="button" id="update-router" class="btn btn-sm btn-primary">{{ __('hotspot.save') }}</button>
                 </div>
             </form>
         </div>

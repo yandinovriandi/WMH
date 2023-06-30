@@ -1,6 +1,6 @@
 <x-mikrotik.app-mikrotik-layout>
     <x-slot name="title">
-       List Voucher {{$mikrotik->name}}
+       {{ __('hotspot.voucher.list-voucher', ['name' => $mikrotik->name ]) }}
     </x-slot>
     <x-slot name="header">
         <div class="col-auto mb-3">
@@ -14,19 +14,19 @@
         <div class="col-12 col-xl-auto mb-3">
             <a class="btn btn-sm btn-light text-primary add-voucher me-2 sm:mb-2"
                href="javascript:void(0)">
-                <i data-feather='plus-circle' class="me-1"></i> add voucher
+                <i data-feather='plus-circle' class="me-1"></i> {{ __('hotspot.voucher.add-voucher') }}
             </a>
             <a class="btn btn-sm btn-green-soft text-success generate-voucher"
                href="javascript:void(0)">
-                <i data-feather='hash' class="me-1"></i> generate voucher
+                <i data-feather='hash' class="me-1"></i> {{ __('hotspot.voucher.generate-voucher') }}
             </a>
         </div>
     </x-slot>
     <div class="d-flex justify-content-between align-items-sm-center flex-column flex-sm-row mb-4">
         <div class="me-4 mb-3 mb-sm-0">
-            <h1 class="mb-0">Lists Voucher on: {{$mikrotik->name}}</h1>
+            <h1 class="mb-0">{{ __('hotspot.voucher.list-voucher-on', ['name' => $mikrotik->name ]) }}</h1>
             <div class="small">
-                <span class="fw-500 text-primary">Tanggal & Waktu</span>
+                <span class="fw-500 text-primary">{{ __('hotspot.date-time') }}</span>
                 · <span id="tanggal"></span> · <span id="waktu"></span>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="card-shadow">
                 <div class="card">
                     <div class="card-header">
-                        All Voucher
+                        {{ __('hotspot.voucher.all-voucher') }}
                     </div>
                     <div class="card-body">
                         <table id="vouchersTable" class="table  datatable-loading no-footer sortable searchable">
