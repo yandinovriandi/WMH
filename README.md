@@ -34,7 +34,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 ```bash
-composer i
+npm i
 ```
 ```bash
 php artisan migrate
