@@ -39,7 +39,7 @@
                         {{ __('hotspot.voucher.all-voucher') }}
                     </div>
                     <div class="card-body">
-                        <table id="vouchersTable" class="table  datatable-loading no-footer sortable searchable">
+                        <table id="vouchersTable" class="table table-responsive  datatable-loading no-footer sortable searchable">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -48,17 +48,81 @@
                                 <th>Profile</th>
                                 <th>Uptime</th>
                                 <th>Status</th>
+                                <th class="text-end">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
+{{--                            @dd($vouchers)--}}
                             @foreach($vouchers as $voucher)
                                 <tr>
-                                    <td>{{$loop->iteration}}</td>
-                                    <td>{{ $voucher['name'] }}</td>
-                                    <td>{{ $voucher['password'] ?? 'no data' }}</td>
-                                    <td>{{ $voucher['profile'] ?? 'no data' }}</td>
-                                    <td>{{ $voucher['uptime'] ?? 'no data' }}</td>
-                                    <td>{{ $voucher['status'] ?? 'active' }}</td>
+                                    <td><span class="badge rounded-pill bg-secondary-soft text-secondary">{{$loop->iteration}}</span></td>
+                                    <td><span class="badge bg-blue-soft text-primary">{{ $voucher['name'] }}</span></td>
+                                    <td><span class="badge bg-info-soft text-info">{{ $voucher['password'] ?? 'no data' }}</span></td>
+                                    <td>
+                                    <span class="badge bg-danger-soft text-danger" >
+                                       <i class="fas fa-id-card-alt"></i> {{ $voucher['profile'] ?? 'no data' }}
+                                    </span>
+                                    </td>
+                                    <td><span class="badge bg-warning-soft text-warning"><i class="fas fa-clock"></i> {{ uptime($voucher['uptime']) ?? 'no data' }}</span></td>
+                                    <td>
+                                        @if ($voucher['disabled'] === \App\Enums\VoucherStatus::ENABLE->value)
+                                            <span class="badge bg-success">
+                                          <i class="fas fa-lock-open"></i> enabled
+                                        </span>
+                                        @endif
+                                         @if ($voucher['disabled'] === \App\Enums\VoucherStatus::DISABLE->value)
+                                                <span class="badge bg-danger">
+                                          <i class="fas fa-lock"></i> disabled
+                                        </span>
+                                        @endif
+                                    </td>
+                                    <td class="d-flex items-center justify-content-end">
+                                        <x-table.drop-down-table>
+                                            @if ($voucher['disabled'] === \App\Enums\VoucherStatus::DISABLE->value)
+                                                <li>
+                                                    <form method="POST" action="{{ route('voucher.enable', ['mikrotik' => $mikrotik, 'username' => $voucher['name']]) }}">
+                                                        @csrf
+                                                        @method('put')
+                                                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                               <i class="far fa-check-circle me-2 text-success"></i> enable
+                                                        </a>
+                                                    </form>
+                                                </li>
+                                                <li>
+                                                    <form method="POST" action="{{ route('voucher.delete',$mikrotik) }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <input type="hidden" name="username" value="{{$voucher['name']}}">
+                                                        <button type="submit" class="dropdown-item" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                            <i class="fa-regular fa-trash-can me-2 text-danger"></i> delete
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            @endif
+                                            @if ($voucher['disabled'] === \App\Enums\VoucherStatus::ENABLE->value)
+                                                    <li>
+                                                        <form method="POST" action="{{ route('voucher.disable', ['mikrotik' => $mikrotik, 'username' => $voucher['name']]) }}">
+                                                            @csrf
+                                                            @method('put')
+                                                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                 <i class="far fa-times-circle text-warning me-2"></i>
+                                                                disable
+                                                            </a>
+                                                        </form>
+                                                    </li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('voucher.delete',$mikrotik) }}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <input type="hidden" name="username" value="{{$voucher['name']}}">
+                                                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <i class="fa-regular fa-trash-can me-2 text-danger"></i> delete
+                                                            </a>
+                                                        </form>
+                                                    </li>
+                                            @endif
+                                        </x-table.drop-down-table>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -70,6 +134,7 @@
         </div>
     </div>
     @pushonce('scripts')
+        @include('mikrotik.partial.resource')
         <script>
             $(document).ready(function() {
                 $('#vouchersTable').DataTable({

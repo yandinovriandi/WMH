@@ -32,7 +32,8 @@
     },
     "autoload-dev": {
         "files": [
-            "app/Functions/formatByte.php"
+            "app/Functions/formatByte.php",
+            "app/Functions/uptime.php"
         ],
         "psr-4": {
             "Tests\\": "tests/"

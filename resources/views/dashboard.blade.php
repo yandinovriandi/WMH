@@ -25,7 +25,7 @@
                             <div class="small fw-bold text-primary mb-1">{{ __('dashboard.total-router') }}</div>
                             <div class="h5">
                                 <span id="mikrotiksCount" class="badge bg-blue-soft text-primary rounded-pill">
-                                    {{auth()->user()->mikrotiks()->count()}} {{ session()->has('locale') }}
+                                    {{auth()->user()->mikrotiks()->count()}}
                                 </span>
                             </div>
                             <div class="text-xs fw-bold text-success d-inline-flex align-items-center">

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Hotspot\GetHotspotController;
 use App\Http\Controllers\Hotspot\GetIncomeController;
+use App\Http\Controllers\Hotspot\VoucherActionController;
 use App\Http\Controllers\Hotspot\VoucherController;
 use App\Http\Controllers\MikrotikController;
 use App\Http\Controllers\Ppp\GetPppController;
@@ -12,7 +13,7 @@ use App\Http\Controllers\TestConnectionController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
-$supported_language = ['en' ,'id'];
+$supported_language = ['en', 'id'];
 
 Route::redirect('/', '/login');
 
@@ -22,11 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         if ($locale) {
             App::setLocale($locale);
             session()->put('locale', $locale);
-            // dd(session()->all());
-            return redirect()->route('dashboard');
-        } else {
-            return redirect()->route('dashboard');
         }
+        return redirect()->route('dashboard');
     })->name('update-language');
 
     Route::get('mikrotiks/{mikrotik:slug}', [MikrotikController::class, 'show'])->name('mikrotiks.show');
@@ -42,6 +40,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/vouchers/{mikrotik:slug}/lists', [VoucherController::class, 'voucher'])->name('voucher.list');
 
     //    response request
+    Route::put('/voucher/mikrotik/{mikrotik:slug}/enable',[VoucherActionController::class,'enableOne'])->name('voucher.enable');
+    Route::put('/voucher/mikrotik/{mikrotik:slug}/disable',[VoucherActionController::class,'disableOne'])->name('voucher.disable');
+    Route::delete('/voucher/mikrotik/{mikrotik:slug}/delete',[VoucherActionController::class,'deleteOne'])->name('voucher.delete');
+
     Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-hotspot-active', [GetHotspotController::class, 'getCountActive'])->name('hotspot.count');
     Route::get('/mikrotik/hotspot/{mikrotik:slug}/get-all-users', [GetHotspotController::class, 'getAllUsers'])->name('hotspot.users');
 

@@ -6,5 +6,5 @@ return [
     'total-router' => 'Jumlah router',
     'connected' => 'Terkoneksi',
     'free-edition' => 'Edisi Gratis',
-    'router-list' => 'Router list'
+    'router-list' => 'Router list',
 ];

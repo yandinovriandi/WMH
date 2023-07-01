@@ -36,28 +36,28 @@ class VoucherController extends Controller
         $vcr = $this->hotspotService->getHotspotVouchers($router);
         $vouchers = VoucherResource::collection($vcr);
 
-//        if (request()->ajax()) {
-//            return DataTables::of($vouchers)
-//                ->addIndexColumn()
-////                ->addColumn('username', function ($data) {
-////                    return '<span class="badge bg-cyan-soft text-blue rounded-pill">'.$data['username'].'</span>';
-////                })
-////                ->addColumn('password', function ($data) {
-////                    return '<span class="badge bg-green-soft text-green rounded-pill">'.$data['password'].'</span>';
-////                })
-////                ->addColumn('profile', function ($data) {
-////                    return '<span class="badge bg-purple-soft text-purple rounded-pill">'.$data['profile'].'</span>';
-////                })
-////                ->addColumn('action', function ($data) {
-////                    return view('mikrotik.partial._action')->with('data', $data);
-////                })
-////                ->rawColumns(['action'])
-//                ->make(true);
-//        }
+        //        if (request()->ajax()) {
+        //            return DataTables::of($vouchers)
+        //                ->addIndexColumn()
+        ////                ->addColumn('username', function ($data) {
+        ////                    return '<span class="badge bg-cyan-soft text-blue rounded-pill">'.$data['username'].'</span>';
+        ////                })
+        ////                ->addColumn('password', function ($data) {
+        ////                    return '<span class="badge bg-green-soft text-green rounded-pill">'.$data['password'].'</span>';
+        ////                })
+        ////                ->addColumn('profile', function ($data) {
+        ////                    return '<span class="badge bg-purple-soft text-purple rounded-pill">'.$data['profile'].'</span>';
+        ////                })
+        ////                ->addColumn('action', function ($data) {
+        ////                    return view('mikrotik.partial._action')->with('data', $data);
+        ////                })
+        ////                ->rawColumns(['action'])
+        //                ->make(true);
+        //        }
 
         return view('mikrotik.hotspot.voucher', [
             'mikrotik' => $mikrotik,
-             'vouchers' => $vouchers
+            'vouchers' => $vouchers,
         ]);
     }
 }

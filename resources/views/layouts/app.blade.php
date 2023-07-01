@@ -26,6 +26,7 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous">
     </script>
+{{--    @vite('resources/sass/app.scss')--}}
     @stack('styles')
     <!-- Scripts -->
 </head>
@@ -56,7 +57,7 @@
     </div>
 </div>
 <script src={{ asset('assets/vendor/jquery/jquery.min.js') }}></script>
-<script src="{{asset('dist/js/bootstrap.min.js')}}" crossorigin="anonymous">
+<script src="{{asset('dist/js/bootstrap.bundle.js')}}" crossorigin="anonymous">
 </script>
 <script src="{{asset('assets/vendor/datatables/datatables.min.js')}}"></script>
 <script src={{ asset('js/scripts.js') }}></script>

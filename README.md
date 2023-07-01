@@ -43,10 +43,19 @@ Jika anda belum membuat database, maka anda akan otomatis di buatkan oleh larave
 ```bash
 php artisan serve
 ```
+Jalankan queue
+```bash
+php artisan queue:work --queue=hotspot
+```
 ## Penggunaan
 
-Sedang dalam persiapan.
+sedang dalam persiapan.
+
 ![dm.png](public%2Fassets%2Fimg%2Fdemo%2Fdm.png)
+
+penambahan queue pada saat hapus, disable dan enbale hotspot
+
+![dm.png](public/assets/view-hotspot.png)
 
 ## Kontribusi
 

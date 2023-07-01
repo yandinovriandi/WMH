@@ -28,5 +28,5 @@ return [
     'get-reset-link' => 'Get Reset Link',
     'reset-password' => 'Reset Password',
     'resend-verification-email' => 'Resend Verification email',
-    'logout' => "logout"
+    'logout' => 'logout',
 ];

@@ -5,6 +5,7 @@ namespace App\Services\Routerboard;
 use App\Http\Resources\TrafficInterfaceResource;
 use App\Models\Mikrotik;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use RouterOS\Client;
 use RouterOS\Config;
 use RouterOS\Exceptions\BadCredentialsException;
@@ -77,7 +78,7 @@ class SystemService
      * @throws BadCredentialsException
      * @throws ConfigException
      */
-    public function monitoringTraffic(Mikrotik $mikrotik)
+    public function monitoringTraffic(Mikrotik $mikrotik): JsonResponse
     {
         $router = $mikrotik;
         $interface = request()->interface;
