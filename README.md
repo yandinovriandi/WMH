@@ -53,7 +53,7 @@ sedang dalam persiapan.
 
 ![dm.png](public%2Fassets%2Fimg%2Fdemo%2Fdm.png)
 
-penambahan queue pada saat hapus, disable dan enbale hotspot
+penambahan queue pada saat hapus, disable dan enable hotspot
 
 ![dm.png](public/assets/view-hotspot.png)
 
