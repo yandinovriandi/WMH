@@ -33,9 +33,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/testcon', [TestConnectionController::class, 'testConn'])->name('test-con');
     Route::post('/cek-online', [TestConnectionController::class, 'checkOnline'])->name('check-online');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
+        Route::get('', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('', [ProfileController::class, 'update'])->name('update');
+        Route::delete('', [ProfileController::class, 'destroy'])->name('destroy');
+
+        Route::get('security', [ProfileController::class, 'security'])->name('security');
+    });
 
     Route::get('/vouchers/{mikrotik:slug}/lists', [VoucherController::class, 'voucher'])->name('voucher.list');
 
