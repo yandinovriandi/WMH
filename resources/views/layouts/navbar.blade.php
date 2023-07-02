@@ -24,10 +24,10 @@
         <!-- User Dropdown-->
         <li class="nav-item dropdown no-caret dropdown-user me-3 me-lg-4">
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="img-fluid" src="{{ optional(auth()->user()->picture)->url ?? asset('assets/icon.png') }}" /></a>
+                <img class="img-fluid" src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('assets/icon.png') }}" /></a>
             <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownUserImage">
                 <h6 class="dropdown-header d-flex align-items-center">
-                    <img class="dropdown-user-img" src="{{ optional(auth()->user()->picture)->url ?? asset('assets/icon.png') }}" alt="{{auth()->user()->name}}" />
+                    <img class="dropdown-user-img" src="{{ auth()->user()->picture ? asset('storage/' . auth()->user()->picture) : asset('assets/icon.png') }}" alt="{{auth()->user()->name}}" />
                     <div class="dropdown-user-details">
                         <div class="dropdown-user-details-name">{{ auth()->user()->name ?? 'User' }}</div>
                         <div class="dropdown-user-details-email">
