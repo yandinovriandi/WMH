@@ -22,6 +22,16 @@ class ProfileController extends Controller
     }
 
     /**
+     * Display user safety form
+     */
+    public function security(Request $request): View
+    {
+        return view('profile.security', [
+            'user' => $request->user()
+        ]);
+    }
+
+    /**
      * Update the user's profile information.
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
