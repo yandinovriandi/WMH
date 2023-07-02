@@ -137,7 +137,9 @@
                      data-bs-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav">
                         <a class="nav-link {{ Request::is('profile*') ? 'active' : '' }}"
-                           href={{ route('profile.edit', auth()->user()->slug) }}>Profile & Password</a>
+                           href={{ route('profile.edit', auth()->user()->slug) }}>Profile</a>
+                           <a class="nav-link {{ Request::is('profile*') ? 'active' : '' }}"
+                           href={{ route('profile.security', auth()->user()->slug) }}>Security</a>
                     </nav>
                 </div>
             </div>
