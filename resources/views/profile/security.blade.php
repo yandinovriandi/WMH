@@ -19,23 +19,26 @@
                 <div class="card mb-4">
                     <div class="card-header">Change Password</div>
                     <div class="card-body">
-                        <form>
-                            <!-- Form Group (current password)-->
+                        <form method="post" action="{{ route('password.update') }}">
+                            @csrf
+                            @method('put')
+                            
+                            @if (session('status') === 'password-updated')
+                                <div class="alert alert-success alert-solid">Password has been updated</div>
+                            @endif
                             <div class="mb-3">
-                                <label class="small mb-1" for="currentPassword">Current Password</label>
-                                <input class="form-control" id="currentPassword" type="password" placeholder="Enter current password">
+                                <label class="small mb-1" for="currentPassword">{{ __('Current Password') }}</label>
+                                <input class="form-control" id="currentPassword" name="current_password" type="password" placeholder="Enter current password">
                             </div>
-                            <!-- Form Group (new password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="newPassword">New Password</label>
-                                <input class="form-control" id="newPassword" type="password" placeholder="Enter new password">
+                                <label class="small mb-1" for="newPassword">{{ __('New Password') }}</label>
+                                <input class="form-control" id="newPassword" name="password" type="password" placeholder="Enter new password">
                             </div>
-                            <!-- Form Group (confirm password)-->
                             <div class="mb-3">
-                                <label class="small mb-1" for="confirmPassword">Confirm Password</label>
-                                <input class="form-control" id="confirmPassword" type="password" placeholder="Confirm new password">
+                                <label class="small mb-1" for="confirmPassword">{{ __('Confirm Password') }}</label>
+                                <input class="form-control" id="confirmPassword" name="password_confirmation" type="password" placeholder="Confirm new password">
                             </div>
-                            <button class="btn btn-primary" type="button">Save</button>
+                            <button class="btn btn-primary" type="submit">Save</button>
                         </form>
                     </div>
                 </div>
