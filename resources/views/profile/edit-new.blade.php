@@ -20,16 +20,6 @@
         <div class="row">
             <div class="col-xl-4">
                 @include('profile.partials.profile-card-picture')
-                <div class="card mb-4 mb-xl-0 mt-4">
-                    <div class="card-header">Delete Account</div>
-                    <div class="card-body">
-                        <p>
-                            Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.
-                        </p>
-
-                        <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
-                    </div>
-                </div>
             </div>
             <div class="col-xl-8">
                 <!-- Account details card-->
@@ -37,6 +27,18 @@
                     <div class="card-header">Account Details</div>
                     <div class="card-body">
                         @include('profile.partials.update-profile-information')
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12">
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Delete Account</div>
+                    <div class="card-body">
+                        <p>
+                            Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.
+                        </p>
+
+                        <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
                     </div>
                 </div>
             </div>
