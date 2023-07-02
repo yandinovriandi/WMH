@@ -29,14 +29,17 @@
                             <div class="mb-3">
                                 <label class="small mb-1" for="currentPassword">{{ __('Current Password') }}</label>
                                 <input class="form-control" id="currentPassword" name="current_password" type="password" placeholder="Enter current password">
+                                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="newPassword">{{ __('New Password') }}</label>
                                 <input class="form-control" id="newPassword" name="password" type="password" placeholder="Enter new password">
+                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
                             </div>
                             <div class="mb-3">
                                 <label class="small mb-1" for="confirmPassword">{{ __('Confirm Password') }}</label>
                                 <input class="form-control" id="confirmPassword" name="password_confirmation" type="password" placeholder="Confirm new password">
+                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
                             </div>
                             <button class="btn btn-primary" type="submit">Save</button>
                         </form>
