@@ -22,9 +22,9 @@
                         <form method="post" action="{{ route('password.update') }}">
                             @csrf
                             @method('put')
-                            
+
                             @if (session('status') === 'password-updated')
-                                <div class="alert alert-success alert-solid">Password has been updated</div>
+                            <div class="alert alert-success alert-solid">Password has been updated</div>
                             @endif
                             <div class="mb-3">
                                 <label class="small mb-1" for="currentPassword">{{ __('Current Password') }}</label>
@@ -53,44 +53,41 @@
                         <p>
                             Deleting your account is a permanent action and cannot be undone. If you are sure you want to delete your account, select the button below.
                         </p>
-
-                        <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')">{{ __('Delete Account') }}</x-danger-button>
+                        <x-danger-button data-bs-toggle="modal" data-bs-target="#confirmUser">{{ __('Delete Account') }}</x-danger-button>
                     </div>
                 </div>
             </div>
         </div>
-        <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-                @csrf
-                @method('delete')
+        <div class="modal fade" id="confirmUser" tabindex="-1" role="dialog" aria-labelledby="confirmUserLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmUserLabel">{{ __('Are you sure you want to delete your account?') }}</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="mt-1 text-sm text-gray-600">
+                            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                        </p>
 
-                <h2 class="text-lg font-medium text-gray-900">
-                    {{ __('Are you sure you want to delete your account?') }}
-                </h2>
+                        <form method="post" action="{{ route('profile.destroy') }}" id="confirmForm">
+                            @csrf
+                            @method('delete')
 
-                <p class="mt-1 text-sm text-gray-600">
-                    {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-                </p>
-
-                <div class="mt-6">
-                    <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                    <x-text-input id="password" name="password" type="password" class="mt-1 block w-3/4" placeholder="{{ __('Password') }}" />
-
-                    <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                            <div class="mb-3">
+                                <label class="small mb-1" for="confirmPassword">{{ __('Confirm Password') }}</label>
+                                <input class="form-control" id="confirmPassword" name="password" type="password" placeholder="Confirm new password">
+                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit" onclick="$('#confirmForm').submit()">Confirm</button>
+                    </div>
                 </div>
-
-                <div class="mt-6 flex justify-end">
-                    <x-secondary-button x-on:click="$dispatch('close')">
-                        {{ __('Cancel') }}
-                    </x-secondary-button>
-
-                    <x-danger-button class="ml-3">
-                        {{ __('Delete Account') }}
-                    </x-danger-button>
-                </div>
-            </form>
-        </x-modal>
+            </div>
+        </div>
     </div>
 
 </x-app-layout>
