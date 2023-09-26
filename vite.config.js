@@ -1,6 +1,6 @@
 import laravel from "laravel-vite-plugin";
+import path from 'path';
 import { defineConfig } from "vite";
-
 export default defineConfig({
     resolve: {
         alias: {
